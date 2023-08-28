@@ -27,7 +27,6 @@ namespace MultiSelectDropdownTest.Controllers
                 List<Names> names = new List<Names>();
                 List<int> selected = new List<int> { 1, 2, 3, 4, 5};
                 names = connection.Query<Names>("SP_GET_NAMES",CommandType.StoredProcedure).ToList();
-                names.Add(new Names() { Id = 10, Name = "BB", Ids = selected });
                 ViewBag.Names = names;
                 ViewBag.Selected = selected;
             }

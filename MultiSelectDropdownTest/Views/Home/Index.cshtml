@@ -3,6 +3,7 @@
 @addTagHelper *, AuthoringTagHelpers;
 @{
     ViewData["Title"] = "Home Page";
+    List<int> selected = ViewBag.Selected;
 }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.sumoselect/3.4.9/sumoselect.min.css" />
 <div class="text-center">
@@ -11,7 +12,18 @@
 </div>
 
 <form asp-action="Index">
-    <select class="form-select namesSelect" aria-label="Default select example" asp-for="Ids" asp-items="@(new MultiSelectList( ViewBag.Names,"Ids","Name"))" id="namesSelect" multiple="multiple">
+    <select class="form-select namesSelect" aria-label="Default select example" asp-for="Ids" id="namesSelect" multiple="multiple">
+        @foreach (var item in (List<Names>)ViewBag.Names)
+        {
+            if (selected.IndexOf(item.Id) != -1)
+            {
+                <option selected value="@item.Id">@item.Name</option>
+            }
+            else
+            {
+                <option value="@item.Id">@item.Name</option>
+            }
+        }
     </select>
     <button type="submit">
         Submit
