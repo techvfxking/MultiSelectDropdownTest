@@ -1,0 +1,29 @@
+﻿@model MultiSelectDropdownTest.Models.Names;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers;
+@{
+    ViewData["Title"] = "Home Page";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.sumoselect/3.4.9/sumoselect.min.css" />
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<form asp-action="Index">
+    <select class="form-select namesSelect" aria-label="Default select example" asp-for="Ids" asp-items="@(new MultiSelectList( ViewBag.Names,"Ids","Name"))" id="namesSelect" multiple="multiple">
+    </select>
+    <button type="submit">
+        Submit
+    </button>
+</form>
+
+@section Scripts{
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.sumoselect/3.4.9/jquery.sumoselect.min.js"></script>
+    <script>
+        $(() => {
+        $('.namesSelect').SumoSelect();
+
+        });
+    </script>
+}
